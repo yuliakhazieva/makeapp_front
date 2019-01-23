@@ -91,6 +91,7 @@
                     </view>
                     <tabBarItem key="tabBarItem" title="Brands" image="list" id="cPa-gy-q4n"/>
                     <connections>
+                        <outlet property="searchBar" destination="1Ij-Yf-fKR" id="Fbl-Ab-PoK"/>
                         <outlet property="table" destination="pUt-zv-gah" id="lfg-EX-YBu"/>
                     </connections>
                 </viewController>

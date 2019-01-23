@@ -11,16 +11,17 @@ import FirebaseCore
 import FirebaseDatabase
 import Firebase
 
-class BrandsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class BrandsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate  {
     
     var refBrands: DatabaseReference!
     
+    @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var table: UITableView!
     var brandlist = [String]()
     var ref = DatabaseReference()
-    
+    var filteredData: [String]! = []
     public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int{
-        return brandlist.count
+        return filteredData.count
     }
     
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell{
@@ -31,7 +32,7 @@ class BrandsViewController: UIViewController, UITableViewDelegate, UITableViewDa
         let brand: String
         
         //getting the artist of selected position
-        brand = brandlist[indexPath.row]
+        brand = filteredData[indexPath.row]
         
         //adding values to labels
         cell.nameButton.setTitle(brand, for: []) 
@@ -42,6 +43,7 @@ class BrandsViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        searchBar.delegate = self
         refBrands = Database.database().reference().child("companies");
         refBrands.observe(DataEventType.value, with: { (snapshot) in
             
@@ -62,16 +64,24 @@ class BrandsViewController: UIViewController, UITableViewDelegate, UITableViewDa
                     //appending it to list
                     self.brandlist.append(brand)
                 }
-                
+                self.filteredData = self.brandlist
                 //reloading the tableview
                 self.table.reloadData()
             }
         })
+
     }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        filteredData = searchText.isEmpty ? brandlist : brandlist.filter { (item: String) -> Bool in
+            return item.range(of: searchText, options: .caseInsensitive, range: nil, locale: nil) != nil
+        }
+        table.reloadData()
     }
 }
 
