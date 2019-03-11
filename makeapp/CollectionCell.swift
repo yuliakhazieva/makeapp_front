@@ -1,17 +1,15 @@
 //
-//  ViewControllerTableViewCell.swift
+//  CollectionCell.swift
 //  makeapp
 //
-//  Created by Yulia on 22.01.2019.
+//  Created by Yulia on 06.02.2019.
 //  Copyright © 2019 Yulia. All rights reserved.
 //
 
 import UIKit
 
-class ViewControllerTableViewCell: UITableViewCell {
+class CollectionCell: UITableViewCell {
 
-    @IBOutlet weak var nameLbl: UILabel!
-    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

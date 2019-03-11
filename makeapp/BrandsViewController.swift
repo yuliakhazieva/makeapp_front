@@ -35,7 +35,7 @@ class BrandsViewController: UIViewController, UITableViewDelegate, UITableViewDa
         brand = filteredData[indexPath.row]
         
         //adding values to labels
-        cell.nameButton.setTitle(brand, for: []) 
+        cell.nameLbl.text = brand
         
         //returning cell
         return cell
@@ -82,6 +82,15 @@ class BrandsViewController: UIViewController, UITableViewDelegate, UITableViewDa
             return item.range(of: searchText, options: .caseInsensitive, range: nil, locale: nil) != nil
         }
         table.reloadData()
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if  let destination = segue.destination as? SuperMagicCollapse,
+            let brandIndex = table.indexPathForSelectedRow?.row
+        {
+            destination.brandName = brandlist[brandIndex]
+            destination.title = brandlist[brandIndex]
+        }
     }
 }
 
