@@ -51,7 +51,6 @@ class SuperMagicCollapse: UITableViewController {
 
                                 let data = try? Data(contentsOf: url!)
                                 let product: ProductModel = ProductModel(image: UIImage(data: data!)!, name: product.childSnapshot(forPath: "name").value as! String)
-                                //let product: ProductModel = ProductModel( name: product.childSnapshot(forPath: "name", ).value as! String)
                                 self.productList[self.dict[cat]! - 1].append(product)
                                 
                             }
@@ -95,9 +94,9 @@ class SuperMagicCollapse: UITableViewController {
 }
     
 extension SuperMagicCollapse: UICollectionViewDelegate, UICollectionViewDataSource {
-    
+
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return productList.count
+        return productList[collectionView.tag].count
     }
     
     func collectionView(_ collectionView: UICollectionView,cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -106,7 +105,7 @@ extension SuperMagicCollapse: UICollectionViewDelegate, UICollectionViewDataSour
        
         if(indexPath.row < productList.count){
             if(indexPath.item < productList[indexPath.row].count){
-                cell.configure(with: productList[indexPath.row][indexPath.item])
+                cell.configure(with: productList[collectionView.tag][indexPath.item])
             }
         }
 
