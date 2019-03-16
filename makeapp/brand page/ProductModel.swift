@@ -11,6 +11,7 @@ import Foundation
 import UIKit
 
 struct ProductModel {
+    let id:String
     let image: UIImage
     let name: String
 }

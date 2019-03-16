@@ -18,7 +18,7 @@ class SuperMagicCollapse: UITableViewController {
     var brandName = String()
     var categoryList = [String]()
     var productList = [[ProductModel]]()
-    var dict: [String: Int] = [:]
+    var productIDs = [[String]]()
     var refCategories: DatabaseReference!
     var refProducts: DatabaseReference!
 
@@ -28,40 +28,41 @@ class SuperMagicCollapse: UITableViewController {
         refCategories = Database.database().reference().child("companies").child(brandName);
         refCategories.observe(DataEventType.value, with: { (snapshot) in
             
-            if snapshot.childrenCount > 0 {
-                self.categoryList.removeAll()
+            self.categoryList.removeAll()
+            
+            for category in snapshot.children.allObjects as! [DataSnapshot] {
+                let cat = category.key
+                if cat != "sitemap" {
+                    self.categoryList.append(cat)
+                    self.productList.append(contentsOf: [[]])
+                    self.productIDs.append(contentsOf: [[]])
+                }
                 
-                for category in snapshot.children.allObjects as! [DataSnapshot] {
-                    let cat = category.key
-                    if cat != "sitemap" {
-                        self.categoryList.append(cat)
-                        self.productList.append(contentsOf: [[]])
-                    }
-                    self.dict[cat] = self.categoryList.count
-                    self.refProducts = Database.database().reference().child("companies").child(self.brandName).child(cat);
-                    self.refProducts.observe(DataEventType.value, with: { (snapshot) in
+                for product in category.children.allObjects as! [DataSnapshot] {
+                    self.productIDs[self.categoryList.count - 1].append(product.key)
+                }
+            }
+            
+            self.refProducts = Database.database().reference().child("products");
+            for (index, cat) in self.productIDs.enumerated() {
+                for item in cat {
+                    var product = self.refProducts.queryOrderedByKey().queryEqual(toValue: item)
+                    product.observe(DataEventType.value, with: { (snapshot) in
+                        for product in snapshot.children.allObjects as! [DataSnapshot] {
                         
-                        if snapshot.childrenCount > 0 {
-                            
-                            for product in snapshot.children.allObjects as! [DataSnapshot] {
-                                
-                                let pic = product.childSnapshot(forPath: "pics/0").value
-
-                                let url = URL(string: pic as! String)
-
-                                let data = try? Data(contentsOf: url!)
-                                let product: ProductModel = ProductModel(image: UIImage(data: data!)!, name: product.childSnapshot(forPath: "name").value as! String)
-                                self.productList[self.dict[cat]! - 1].append(product)
-                                
-                            }
-                            self.tableView.reloadData()
+                            let picture = product.childSnapshot(forPath: "pics/0").value
+                            let url = URL(string: picture as! String)
+                            let data = try? Data(contentsOf: url!)
+                            let product: ProductModel = ProductModel(id: item, image: UIImage(data: data!)!, name: product.childSnapshot(forPath: "name").value as! String)
+                            self.productList[index].append(product)
+                        
                         }
+                        self.tableView.reloadData()
                     })
                 }
-                self.tableView.reloadData()
             }
-        })
-        
+        }
+        )
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -97,6 +98,12 @@ extension SuperMagicCollapse: UICollectionViewDelegate, UICollectionViewDataSour
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return productList[collectionView.tag].count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let vc = UIStoryboard(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "ProductScene") as! ProductController
+        vc.setup(id: productList[collectionView.tag][indexPath.item].id)
+        self.present(vc, animated: true, completion: nil)
     }
     
     func collectionView(_ collectionView: UICollectionView,cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
