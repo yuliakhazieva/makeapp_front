@@ -17,6 +17,7 @@
 		63467C9C223E3505006D3809 /* MyPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63467C9B223E3505006D3809 /* MyPageViewController.swift */; };
 		63467C9E223E38F5006D3809 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63467C9D223E38F5006D3809 /* SearchViewController.swift */; };
 		63467CA0223E3930006D3809 /* DiscoverViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63467C9F223E3930006D3809 /* DiscoverViewController.swift */; };
+		63467CA2223E75F5006D3809 /* SearchResultsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63467CA1223E75F5006D3809 /* SearchResultsViewController.swift */; };
 		636A757021F7765A0090ED34 /* BrandsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 636A756F21F7765A0090ED34 /* BrandsViewController.swift */; };
 		636A757421FA125C0090ED34 /* BrandViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 636A757321FA125C0090ED34 /* BrandViewController.swift */; };
 		63BFF37221F4FC0A00C64EC7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63BFF37121F4FC0A00C64EC7 /* AppDelegate.swift */; };
@@ -43,6 +44,7 @@
 		63467C9B223E3505006D3809 /* MyPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageViewController.swift; sourceTree = "<group>"; };
 		63467C9D223E38F5006D3809 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		63467C9F223E3930006D3809 /* DiscoverViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoverViewController.swift; sourceTree = "<group>"; };
+		63467CA1223E75F5006D3809 /* SearchResultsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultsViewController.swift; sourceTree = "<group>"; };
 		636A756F21F7765A0090ED34 /* BrandsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrandsViewController.swift; sourceTree = "<group>"; };
 		636A757321FA125C0090ED34 /* BrandViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrandViewController.swift; sourceTree = "<group>"; };
 		63BFF36E21F4FC0A00C64EC7 /* makeapp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = makeapp.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -97,6 +99,7 @@
 			children = (
 				63DD822E222BE9DA00F58B35 /* brand page */,
 				63BFF37721F4FC0A00C64EC7 /* Main.storyboard */,
+				63467CA1223E75F5006D3809 /* SearchResultsViewController.swift */,
 				63467C9F223E3930006D3809 /* DiscoverViewController.swift */,
 				63467C9D223E38F5006D3809 /* SearchViewController.swift */,
 				63467C95223DA339006D3809 /* SingInViewController.swift */,
@@ -315,6 +318,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				63467C9E223E38F5006D3809 /* SearchViewController.swift in Sources */,
+				63467CA2223E75F5006D3809 /* SearchResultsViewController.swift in Sources */,
 				63467C98223DA348006D3809 /* LoginViewController.swift in Sources */,
 				636A757421FA125C0090ED34 /* BrandViewController.swift in Sources */,
 				63467C8E223BE3DD006D3809 /* ProductController.swift in Sources */,

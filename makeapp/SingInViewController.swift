@@ -8,11 +8,13 @@
 
 import UIKit
 import FirebaseAuth
+import FirebaseDatabase
 
 class SingInViewController: UIViewController {
     @IBOutlet weak var email: UITextField!
     @IBOutlet weak var password: UITextField!
     @IBOutlet weak var confirm: UITextField!
+    var ref: DatabaseReference!
     
     @IBAction func onClick(_ sender: Any) {
         if password.text != confirm.text {
@@ -37,11 +39,12 @@ class SingInViewController: UIViewController {
                     alertController.addAction(defaultAction)
                     self.present(alertController, animated: true, completion: nil)
                 }
-            }
+            } 
         }
     }
     override func viewDidLoad() {
         super.viewDidLoad()
+        ref = Database.database().reference()
     }
 
     override func didReceiveMemoryWarning() {

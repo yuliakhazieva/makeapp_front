@@ -61,7 +61,17 @@ class ProductController: UIViewController, UICollectionViewDelegate, UICollectio
             }
         })
     }
-        
+    
+    @IBAction func onAddToWishList(_ sender: Any) {
+    }
+    
+    
+    @IBAction func onAddToCollection(_ sender: Any) {
+    }
+    
+    @IBAction func onLeaveReview(_ sender: Any) {
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
