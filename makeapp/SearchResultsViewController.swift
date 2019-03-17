@@ -27,15 +27,16 @@ class SearchResultsViewController: UIViewController, UICollectionViewDelegate, U
         searchOutput.register(UINib.init(nibName: "collectionCell", bundle: nil), forCellWithReuseIdentifier: "Cell")
         
         if(companyName != nil) {
-            var result = self.refCompsnies.queryOrderedByKey().queryStarting(atValue: companyName).queryEnding(atValue: (companyName!+"\\uf8ff"))
-            result.observe(DataEventType.value, with: { (snapshot) in
+            refCompsnies.observe(DataEventType.value, with: { (snapshot) in
                 for company in snapshot.children.allObjects as! [DataSnapshot] {
+                    if (company.key.range(of:self.companyName!) != nil){
                     for category in company.children.allObjects as! [DataSnapshot] {
                         if(category.key == self.category) {
                             for product in category.children.allObjects as! [DataSnapshot] {
                                 self.productIDs.append(product.key)
                             }
                         }
+                    }
                     }
                 }
                 for item in self.productIDs {
@@ -58,14 +59,15 @@ class SearchResultsViewController: UIViewController, UICollectionViewDelegate, U
         }
         
         if(productName != nil) {
-            var result = self.refProducts.queryOrderedByKey().queryEnding(atValue: (productName!+"\\uf8ff"))
             var productIDsdouble: [String] = []
-            result.observe(DataEventType.value, with: { (snapshot) in
+            refProducts.observe(DataEventType.value, with: { (snapshot) in
                 for product in snapshot.children.allObjects as! [DataSnapshot] {
-                    if(self.productIDs == []) {
-                        self.productIDs.append(product.key)
-                    } else {
-                        productIDsdouble.append(product.key)
+                    if (product.key.characters.split(separator: "Ф").map(String.init)[0].range(of:self.productName!) != nil) {
+                        if(self.companyName == nil) {
+                            self.productIDs.append(product.key)
+                        } else {
+                            productIDsdouble.append(product.key)
+                        }
                     }
                 }
                 
@@ -76,6 +78,7 @@ class SearchResultsViewController: UIViewController, UICollectionViewDelegate, U
                 }
                 
                 self.produtModels = []
+                if (self.productIDs != []){
                 for item in self.productIDs {
                     var product = self.refProducts.queryOrderedByKey().queryEqual(toValue: item)
                     product.observe(DataEventType.value, with: { (snapshot) in
@@ -90,6 +93,23 @@ class SearchResultsViewController: UIViewController, UICollectionViewDelegate, U
                         }
                         self.searchOutput.reloadData()
                     })
+                }
+                } else {
+                    for item in productIDsdouble {
+                        var product = self.refProducts.queryOrderedByKey().queryEqual(toValue: item)
+                        product.observe(DataEventType.value, with: { (snapshot) in
+                            for product in snapshot.children.allObjects as! [DataSnapshot] {
+                                
+                                let picture = product.childSnapshot(forPath: "pics/0").value
+                                let url = URL(string: picture as! String)
+                                let data = try? Data(contentsOf: url!)
+                                let product: ProductModel = ProductModel(id: item, image: UIImage(data: data!)!, name: product.childSnapshot(forPath: "name").value as! String)
+                                self.produtModels.append(product)
+                                
+                            }
+                            self.searchOutput.reloadData()
+                        })
+                    }
                 }
             })
         }
