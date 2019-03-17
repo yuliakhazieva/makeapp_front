@@ -8,6 +8,10 @@ target 'makeapp' do
   # Pods for makeapp
 pod 'Firebase/Core'
 pod 'Firebase/Auth'
+pod 'FirebaseUI/Google'
+pod 'FirebaseUI/Facebook'
+pod 'FirebaseUI/Twitter'
+pod 'FirebaseUI/Phone'
 pod 'Firebase/Database'
 
 end

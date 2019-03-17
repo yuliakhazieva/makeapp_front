@@ -37,18 +37,7 @@ class ProductController: UIViewController, UICollectionViewDelegate, UICollectio
     override func viewDidLoad() {
         super.viewDidLoad()
         pics.register(UINib.init(nibName: "pic", bundle: nil), forCellWithReuseIdentifier: "picCell")
-//        var backbutton = UIButton(type: .custom)
-//        backbutton.setImage(UIImage(named: "BackButton.png"), for: .normal)
-//        backbutton.setTitle("Back", for: .normal)
-//        backbutton.setTitleColor(backbutton.tintColor, for: .normal) // You can change the TitleColor
-//        backbutton.addTarget(self, action: "backAction", for: .touchUpInside)
-//
-//        self.navigationItem.leftBarButtonItem = UIBarButtonItem(customView: backbutton)
     }
-    
-//    func backAction() -> Void {
-//        self.navigationController?.popViewController(animated: true)
-//    }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)

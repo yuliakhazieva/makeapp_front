@@ -43,6 +43,7 @@ class BrandsViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.navigationItem.hidesBackButton = true
         searchBar.delegate = self
         refBrands = Database.database().reference().child("companies");
         refBrands.observe(DataEventType.value, with: { (snapshot) in
