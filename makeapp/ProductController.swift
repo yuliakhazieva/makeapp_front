@@ -11,13 +11,13 @@ import FirebaseCore
 import FirebaseDatabase
 import Firebase
 
+
 class ProductController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
 
     var productID: String = ""
     var imageList: [UIImage] = []
     
     @IBOutlet var reviews: UITableView!
-    @IBOutlet var leaveReview: UIButton!
     @IBOutlet var pics: UICollectionView!
     @IBOutlet var addToCollection: UIButton!
     @IBOutlet var addToWishList: UIButton!
@@ -43,7 +43,8 @@ class ProductController: UIViewController, UICollectionViewDelegate, UICollectio
         super.viewWillAppear(true)
         refProduct = Database.database().reference().child("products").child(productID);
         refProduct.observe(DataEventType.value, with: { (snapshot) in
-            
+            self.imageList.removeAll()
+            self.productID.removeAll()
             if snapshot.childrenCount > 0 {
                 
                 self.name.text = snapshot.childSnapshot(forPath: "name").value as? String
@@ -69,12 +70,16 @@ class ProductController: UIViewController, UICollectionViewDelegate, UICollectio
     @IBAction func onAddToCollection(_ sender: Any) {
     }
     
+    
     @IBAction func onLeaveReview(_ sender: Any) {
+        let vc = UIStoryboard(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "leaveReview") as! LeaveReviewViewController
+        vc.setUp(productId: productID)
+        navigationController?.pushViewController(vc, animated: true)
+        
     }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {

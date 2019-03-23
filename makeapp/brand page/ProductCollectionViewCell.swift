@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SDWebImage
 
 class ProductCollectionViewCell: UICollectionViewCell {
     
@@ -19,7 +20,9 @@ class ProductCollectionViewCell: UICollectionViewCell {
     }
     
     public func configure(with model: ProductModel) {
-        productImage.image = model.image
+        let imageURL = URL(fileURLWithPath: "placeholder.png")
+        let placeholderimage   = UIImage(contentsOfFile: imageURL.path)
+        productImage.sd_setImage(with: model.image, placeholderImage: placeholderimage)
         productLabel.text = model.name
     }
 }

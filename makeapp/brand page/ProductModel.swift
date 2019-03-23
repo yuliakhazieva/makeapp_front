@@ -12,6 +12,6 @@ import UIKit
 
 struct ProductModel {
     let id:String
-    let image: UIImage
+    let image: URL
     let name: String
 }

@@ -18,6 +18,7 @@
 		63467C9E223E38F5006D3809 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63467C9D223E38F5006D3809 /* SearchViewController.swift */; };
 		63467CA0223E3930006D3809 /* DiscoverViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63467C9F223E3930006D3809 /* DiscoverViewController.swift */; };
 		63467CA2223E75F5006D3809 /* SearchResultsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63467CA1223E75F5006D3809 /* SearchResultsViewController.swift */; };
+		63467CA4223EC6D4006D3809 /* LeaveReviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63467CA3223EC6D4006D3809 /* LeaveReviewViewController.swift */; };
 		636A757021F7765A0090ED34 /* BrandsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 636A756F21F7765A0090ED34 /* BrandsViewController.swift */; };
 		636A757421FA125C0090ED34 /* BrandViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 636A757321FA125C0090ED34 /* BrandViewController.swift */; };
 		63BFF37221F4FC0A00C64EC7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63BFF37121F4FC0A00C64EC7 /* AppDelegate.swift */; };
@@ -45,6 +46,7 @@
 		63467C9D223E38F5006D3809 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		63467C9F223E3930006D3809 /* DiscoverViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoverViewController.swift; sourceTree = "<group>"; };
 		63467CA1223E75F5006D3809 /* SearchResultsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultsViewController.swift; sourceTree = "<group>"; };
+		63467CA3223EC6D4006D3809 /* LeaveReviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaveReviewViewController.swift; sourceTree = "<group>"; };
 		636A756F21F7765A0090ED34 /* BrandsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrandsViewController.swift; sourceTree = "<group>"; };
 		636A757321FA125C0090ED34 /* BrandViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrandViewController.swift; sourceTree = "<group>"; };
 		63BFF36E21F4FC0A00C64EC7 /* makeapp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = makeapp.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -99,6 +101,7 @@
 			children = (
 				63DD822E222BE9DA00F58B35 /* brand page */,
 				63BFF37721F4FC0A00C64EC7 /* Main.storyboard */,
+				63467CA3223EC6D4006D3809 /* LeaveReviewViewController.swift */,
 				63467CA1223E75F5006D3809 /* SearchResultsViewController.swift */,
 				63467C9F223E3930006D3809 /* DiscoverViewController.swift */,
 				63467C9D223E38F5006D3809 /* SearchViewController.swift */,
@@ -252,9 +255,10 @@
 				"${BUILT_PRODUCTS_DIR}/Bolts/Bolts.framework",
 				"${BUILT_PRODUCTS_DIR}/FBSDKCoreKit/FBSDKCoreKit.framework",
 				"${BUILT_PRODUCTS_DIR}/FBSDKLoginKit/FBSDKLoginKit.framework",
-				"${BUILT_PRODUCTS_DIR}/GTMOAuth2/GTMOAuth2.framework",
 				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
+				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
+				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
 				"${PODS_ROOT}/TwitterCore/iOS/TwitterCore.framework",
 				"${PODS_ROOT}/TwitterKit/iOS/TwitterKit.framework",
 				"${BUILT_PRODUCTS_DIR}/leveldb-library/leveldb.framework",
@@ -265,9 +269,10 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Bolts.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKCoreKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKLoginKit.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMOAuth2.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TwitterCore.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TwitterKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/leveldb.framework",
@@ -292,7 +297,6 @@
 				"${PODS_CONFIGURATION_BUILD_DIR}/FirebaseUI/FirebaseTwitterAuthUI.bundle",
 				"${PODS_ROOT}/GoogleSignIn/Resources/GoogleSignIn.bundle",
 				"${PODS_ROOT}/TwitterKit/iOS/TwitterKit.framework/TwitterKitResources.bundle",
-				"${PODS_ROOT}/TwitterKit/iOS/TwitterKit.framework/TwitterShareExtensionUIResources.bundle",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
@@ -303,7 +307,6 @@
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/FirebaseTwitterAuthUI.bundle",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GoogleSignIn.bundle",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/TwitterKitResources.bundle",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/TwitterShareExtensionUIResources.bundle",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -317,6 +320,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				63467CA4223EC6D4006D3809 /* LeaveReviewViewController.swift in Sources */,
 				63467C9E223E38F5006D3809 /* SearchViewController.swift in Sources */,
 				63467CA2223E75F5006D3809 /* SearchResultsViewController.swift in Sources */,
 				63467C98223DA348006D3809 /* LoginViewController.swift in Sources */,

@@ -11,6 +11,7 @@ import UIKit
 import FirebaseCore
 import FirebaseDatabase
 import Firebase
+import SDWebImage
 
 class SuperMagicCollapse: UITableViewController {
     
@@ -52,8 +53,7 @@ class SuperMagicCollapse: UITableViewController {
                         
                             let picture = product.childSnapshot(forPath: "pics/0").value
                             let url = URL(string: picture as! String)
-                            let data = try? Data(contentsOf: url!)
-                            let product: ProductModel = ProductModel(id: item, image: UIImage(data: data!)!, name: product.childSnapshot(forPath: "name").value as! String)
+                            let product: ProductModel = ProductModel(id: item, image: url!, name: product.childSnapshot(forPath: "name").value as! String)
                             self.productList[index].append(product)
                         
                         }
