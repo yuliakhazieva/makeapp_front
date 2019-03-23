@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		49B04F9419FF8527AB1EFC3E /* Pods_makeapp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 132FB808BA824465E5A25DC2 /* Pods_makeapp.framework */; };
+		632F0ACE2246BC4900DD7A3B /* ReviewTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 632F0ACD2246BC4900DD7A3B /* ReviewTableViewCell.swift */; };
+		632F0AD22246BFC300DD7A3B /* Review.swift in Sources */ = {isa = PBXBuildFile; fileRef = 632F0AD12246BFC300DD7A3B /* Review.swift */; };
 		63467C8E223BE3DD006D3809 /* ProductController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63467C8D223BE3DD006D3809 /* ProductController.swift */; };
 		63467C92223D2D47006D3809 /* PicsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63467C91223D2D47006D3809 /* PicsCollectionViewCell.swift */; };
 		63467C94223D853B006D3809 /* pic.xib in Resources */ = {isa = PBXBuildFile; fileRef = 63467C93223D853B006D3809 /* pic.xib */; };
@@ -36,6 +38,8 @@
 
 /* Begin PBXFileReference section */
 		132FB808BA824465E5A25DC2 /* Pods_makeapp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_makeapp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		632F0ACD2246BC4900DD7A3B /* ReviewTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewTableViewCell.swift; sourceTree = "<group>"; };
+		632F0AD12246BFC300DD7A3B /* Review.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Review.swift; sourceTree = "<group>"; };
 		63467C8D223BE3DD006D3809 /* ProductController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductController.swift; sourceTree = "<group>"; };
 		63467C91223D2D47006D3809 /* PicsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PicsCollectionViewCell.swift; sourceTree = "<group>"; };
 		63467C93223D853B006D3809 /* pic.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = pic.xib; sourceTree = "<group>"; };
@@ -81,6 +85,7 @@
 		63BFF36521F4FC0900C64EC7 = {
 			isa = PBXGroup;
 			children = (
+				632F0AD12246BFC300DD7A3B /* Review.swift */,
 				63BFF37021F4FC0A00C64EC7 /* makeapp */,
 				63BFF36F21F4FC0A00C64EC7 /* Products */,
 				B24BF54E8A29689231FF4F56 /* Pods */,
@@ -100,6 +105,7 @@
 			isa = PBXGroup;
 			children = (
 				63DD822E222BE9DA00F58B35 /* brand page */,
+				632F0ACD2246BC4900DD7A3B /* ReviewTableViewCell.swift */,
 				63BFF37721F4FC0A00C64EC7 /* Main.storyboard */,
 				63467CA3223EC6D4006D3809 /* LeaveReviewViewController.swift */,
 				63467CA1223E75F5006D3809 /* SearchResultsViewController.swift */,
@@ -325,6 +331,7 @@
 				63467CA2223E75F5006D3809 /* SearchResultsViewController.swift in Sources */,
 				63467C98223DA348006D3809 /* LoginViewController.swift in Sources */,
 				636A757421FA125C0090ED34 /* BrandViewController.swift in Sources */,
+				632F0AD22246BFC300DD7A3B /* Review.swift in Sources */,
 				63467C8E223BE3DD006D3809 /* ProductController.swift in Sources */,
 				63BFF37221F4FC0A00C64EC7 /* AppDelegate.swift in Sources */,
 				63467CA0223E3930006D3809 /* DiscoverViewController.swift in Sources */,
@@ -338,6 +345,7 @@
 				636A757021F7765A0090ED34 /* BrandsViewController.swift in Sources */,
 				63467C96223DA339006D3809 /* SingInViewController.swift in Sources */,
 				63DD8236222C08A600F58B35 /* ProductModel.swift in Sources */,
+				632F0ACE2246BC4900DD7A3B /* ReviewTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

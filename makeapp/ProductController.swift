@@ -12,10 +12,11 @@ import FirebaseDatabase
 import Firebase
 
 
-class ProductController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
+class ProductController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UITableViewDataSource, UITableViewDelegate {
 
     var productID: String = ""
     var imageList: [UIImage] = []
+    var reviewList: [Review] = []
     
     @IBOutlet var reviews: UITableView!
     @IBOutlet var pics: UICollectionView!
@@ -28,6 +29,7 @@ class ProductController: UIViewController, UICollectionViewDelegate, UICollectio
     
     var refProduct: DatabaseReference!
     var refReviews: DatabaseReference!
+    var refUsers: DatabaseReference!
     
     func setup(id: String) {
         self.imageList = []
@@ -44,7 +46,6 @@ class ProductController: UIViewController, UICollectionViewDelegate, UICollectio
         refProduct = Database.database().reference().child("products").child(productID);
         refProduct.observe(DataEventType.value, with: { (snapshot) in
             self.imageList.removeAll()
-            self.productID.removeAll()
             if snapshot.childrenCount > 0 {
                 
                 self.name.text = snapshot.childSnapshot(forPath: "name").value as? String
@@ -59,6 +60,26 @@ class ProductController: UIViewController, UICollectionViewDelegate, UICollectio
                     self.imageList.append(UIImage(data: data!)!)
                 }
                 self.pics.reloadData()
+            }
+        })
+        
+        refReviews = Database.database().reference().child("reviews").child(productID);
+        refReviews.observe(DataEventType.value, with: { (snapshot) in
+            self.reviewList.removeAll()
+            if snapshot.childrenCount > 0 {
+                for review in snapshot.children.allObjects as! [DataSnapshot] {
+                
+                var authorID = review.childSnapshot(forPath: "author").value as? String
+                var rating = review.childSnapshot(forPath: "rating").value as? String
+                var reviewText = review.childSnapshot(forPath: "text").value as? String
+                
+                self.refUsers = Database.database().reference().child("users").child(authorID!);
+                    self.refUsers.observe(DataEventType.value, with: { (snapshot) in
+                        var authorName = snapshot.childSnapshot(forPath: "username").value
+                        self.reviewList.append(Review(author: authorName as! String, rating: rating!, reviewText: reviewText!))
+                    self.reviews.reloadData()
+                    })
+                }
             }
         })
     }
@@ -91,5 +112,24 @@ class ProductController: UIViewController, UICollectionViewDelegate, UICollectio
         cell.pic.image = imageList[indexPath.row]
         return cell
     }
-
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return reviewList.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "reviewCell", for: indexPath)
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView,
+                            willDisplay cell: UITableViewCell,
+                            forRowAt indexPath: IndexPath) {
+        
+        guard let tableViewCell = cell as? ReviewTableViewCell else { return }
+        
+        tableViewCell.author.text = reviewList[indexPath.item].author
+        tableViewCell.textOfReview.text = reviewList[indexPath.item].reviewText
+        tableViewCell.rating.text = String(reviewList[indexPath.item].rating)
+    }
 }
