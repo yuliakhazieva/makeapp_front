@@ -16,13 +16,18 @@ class LeaveReviewViewController: UIViewController, UIPickerViewDelegate, UIPicke
     @IBOutlet weak var reviewText: UITextView!
     @IBOutlet weak var ratingPicker: UIPickerView!
     var refReviews: DatabaseReference?
+    var refProducts: DatabaseReference?
     var productId: String = ""
+    var currentRating: Int = 0;
+    var numOfReviews: Int = 0;
     
     @IBAction func onSave(_ sender: Any) {
         refReviews = Database.database().reference().child("reviews")
-        let data = ["text": reviewText.text, "author": Auth.auth().currentUser?.uid, "rating": String(ratingPicker.selectedRow(inComponent: 0))] as [String : Any]
+        let selecedRating = ratingPicker.selectedRow(inComponent: 0) + 1
+        let data = ["text": reviewText.text, "author": Auth.auth().currentUser?.uid, "rating": String(selecedRating)] as [String : Any]
         refReviews?.child(productId).childByAutoId().setValue(data)
-        
+        var newRating = (currentRating * numOfReviews + selecedRating) / (numOfReviews + 1)
+        refProducts?.child(productId).updateChildValues(["rating": newRating, "numReviews": numOfReviews + 1])
         navigationController?.popViewController(animated: true)
     }
     
@@ -30,6 +35,8 @@ class LeaveReviewViewController: UIViewController, UIPickerViewDelegate, UIPicke
         super.viewDidLoad()
         ratingPicker.delegate = self
         ratingPicker.dataSource = self
+        self.reviewText.layer.borderWidth = 5.0
+        self.reviewText.layer.borderColor = UIColor.purple as! CGColor;
     }
 
     override func didReceiveMemoryWarning() {
@@ -50,6 +57,10 @@ class LeaveReviewViewController: UIViewController, UIPickerViewDelegate, UIPicke
     
     func setUp(productId: String) {
         self.productId = productId
+        refProducts?.child(productId).observe(DataEventType.value, with: { (snapshot) in
+            self.currentRating = snapshot.childSnapshot(forPath: "rating").value as! Int
+            self.numOfReviews = snapshot.childSnapshot(forPath: "numReviews").value as! Int
+        })
     }
     
 }

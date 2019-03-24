@@ -60,6 +60,7 @@ class ProductController: UIViewController, UICollectionViewDelegate, UICollectio
                     self.imageList.append(UIImage(data: data!)!)
                 }
                 self.pics.reloadData()
+                self.rating.text = snapshot.childSnapshot(forPath: "rating").value as? String
             }
         })
         
@@ -69,19 +70,22 @@ class ProductController: UIViewController, UICollectionViewDelegate, UICollectio
             if snapshot.childrenCount > 0 {
                 for review in snapshot.children.allObjects as! [DataSnapshot] {
                 
-                var authorID = review.childSnapshot(forPath: "author").value as? String
-                var rating = review.childSnapshot(forPath: "rating").value as? String
-                var reviewText = review.childSnapshot(forPath: "text").value as? String
+                    let authorID = review.childSnapshot(forPath: "author").value as? String
+                    let rating = review.childSnapshot(forPath: "rating").value as? String
+                    let reviewText = review.childSnapshot(forPath: "text").value as? String
                 
                 self.refUsers = Database.database().reference().child("users").child(authorID!);
                     self.refUsers.observe(DataEventType.value, with: { (snapshot) in
-                        var authorName = snapshot.childSnapshot(forPath: "username").value
+                        let authorName = snapshot.childSnapshot(forPath: "username").value
                         self.reviewList.append(Review(author: authorName as! String, rating: rating!, reviewText: reviewText!))
                     self.reviews.reloadData()
                     })
                 }
             }
         })
+        
+        company.text = productID.split(separator: "Ф").map(String.init)[1].split(separator: " ").map(String.init)[0]
+        
     }
     
     @IBAction func onAddToWishList(_ sender: Any) {

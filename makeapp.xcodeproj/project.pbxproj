@@ -34,6 +34,8 @@
 		63DD8232222C058000F58B35 /* collectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 63DD8231222C058000F58B35 /* collectionCell.xib */; };
 		63DD8234222C077300F58B35 /* ProductCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63DD8233222C077300F58B35 /* ProductCollectionViewCell.swift */; };
 		63DD8236222C08A600F58B35 /* ProductModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63DD8235222C08A600F58B35 /* ProductModel.swift */; };
+		63EFB1562247F8EB00B8600D /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63EFB1552247F8EA00B8600D /* Theme.swift */; };
+		63EFB15A2247FF0800B8600D /* TabController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63EFB1592247FF0800B8600D /* TabController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -66,6 +68,8 @@
 		63DD8231222C058000F58B35 /* collectionCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = collectionCell.xib; sourceTree = "<group>"; };
 		63DD8233222C077300F58B35 /* ProductCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductCollectionViewCell.swift; sourceTree = "<group>"; };
 		63DD8235222C08A600F58B35 /* ProductModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductModel.swift; sourceTree = "<group>"; };
+		63EFB1552247F8EA00B8600D /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
+		63EFB1592247FF0800B8600D /* TabController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabController.swift; sourceTree = "<group>"; };
 		80E42AE70005F557059F3350 /* Pods-makeapp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-makeapp.release.xcconfig"; path = "Pods/Target Support Files/Pods-makeapp/Pods-makeapp.release.xcconfig"; sourceTree = "<group>"; };
 		AE746BE06195A38DEB6E9C4C /* Pods-makeapp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-makeapp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-makeapp/Pods-makeapp.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -107,6 +111,7 @@
 				63DD822E222BE9DA00F58B35 /* brand page */,
 				632F0ACD2246BC4900DD7A3B /* ReviewTableViewCell.swift */,
 				63BFF37721F4FC0A00C64EC7 /* Main.storyboard */,
+				63EFB1552247F8EA00B8600D /* Theme.swift */,
 				63467CA3223EC6D4006D3809 /* LeaveReviewViewController.swift */,
 				63467CA1223E75F5006D3809 /* SearchResultsViewController.swift */,
 				63467C9F223E3930006D3809 /* DiscoverViewController.swift */,
@@ -121,6 +126,7 @@
 				636A756F21F7765A0090ED34 /* BrandsViewController.swift */,
 				636A757321FA125C0090ED34 /* BrandViewController.swift */,
 				63BFF37121F4FC0A00C64EC7 /* AppDelegate.swift */,
+				63EFB1592247FF0800B8600D /* TabController.swift */,
 				63D14EB721F6155B00144FE7 /* GoogleService-Info.plist */,
 				63DD8231222C058000F58B35 /* collectionCell.xib */,
 				63467C93223D853B006D3809 /* pic.xib */,
@@ -332,6 +338,7 @@
 				63467C98223DA348006D3809 /* LoginViewController.swift in Sources */,
 				636A757421FA125C0090ED34 /* BrandViewController.swift in Sources */,
 				632F0AD22246BFC300DD7A3B /* Review.swift in Sources */,
+				63EFB1562247F8EB00B8600D /* Theme.swift in Sources */,
 				63467C8E223BE3DD006D3809 /* ProductController.swift in Sources */,
 				63BFF37221F4FC0A00C64EC7 /* AppDelegate.swift in Sources */,
 				63467CA0223E3930006D3809 /* DiscoverViewController.swift in Sources */,
@@ -340,6 +347,7 @@
 				63DD8230222BED7800F58B35 /* ViewControllerTableViewCell.swift in Sources */,
 				63DA7E77220C8A1D0066FCA6 /* ProductTypeCell.swift in Sources */,
 				63467C9A223DA373006D3809 /* StartViewController.swift in Sources */,
+				63EFB15A2247FF0800B8600D /* TabController.swift in Sources */,
 				63467C9C223E3505006D3809 /* MyPageViewController.swift in Sources */,
 				63DA7E75220AEAF60066FCA6 /* ProductTypesTable.swift in Sources */,
 				636A757021F7765A0090ED34 /* BrandsViewController.swift in Sources */,
