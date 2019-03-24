@@ -314,7 +314,7 @@
                                         </connections>
                                     </collectionView>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" restorationIdentifier="reviews" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="OVU-ex-M9a">
-                                        <rect key="frame" x="0.0" y="466" width="375" height="429"/>
+                                        <rect key="frame" x="1" y="466" width="375" height="429"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="201" id="6LN-t6-MCC"/>
@@ -339,7 +339,7 @@
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fEN-2R-0sP">
+                                                        <textView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" scrollEnabled="NO" editable="NO" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fEN-2R-0sP">
                                                             <rect key="frame" x="15" y="36" width="353" height="91"/>
                                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
@@ -357,7 +357,6 @@
                                                         <constraint firstItem="m5T-Jn-2qG" firstAttribute="leading" secondItem="w1C-NC-mm9" secondAttribute="leadingMargin" id="jE6-uu-PL6"/>
                                                         <constraint firstItem="m5T-Jn-2qG" firstAttribute="top" secondItem="w1C-NC-mm9" secondAttribute="topMargin" id="jOP-hB-1oH"/>
                                                         <constraint firstItem="fEN-2R-0sP" firstAttribute="leading" secondItem="w1C-NC-mm9" secondAttribute="leading" constant="15" id="orx-oY-Ocr"/>
-                                                        <constraint firstItem="f8E-xg-WgQ" firstAttribute="leading" secondItem="m5T-Jn-2qG" secondAttribute="trailing" constant="207" id="ouj-s1-o7W"/>
                                                         <constraint firstItem="fEN-2R-0sP" firstAttribute="top" secondItem="f8E-xg-WgQ" secondAttribute="bottom" constant="4" id="s8X-oC-95v"/>
                                                     </constraints>
                                                 </tableViewCellContentView>
