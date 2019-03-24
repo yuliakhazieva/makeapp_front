@@ -30,6 +30,8 @@ class ProductController: UIViewController, UICollectionViewDelegate, UICollectio
     var refProduct: DatabaseReference!
     var refReviews: DatabaseReference!
     var refUsers: DatabaseReference!
+    var refWishList: DatabaseReference!
+    var refMyBag: DatabaseReference!
     
     func setup(id: String) {
         self.imageList = []
@@ -89,10 +91,18 @@ class ProductController: UIViewController, UICollectionViewDelegate, UICollectio
     }
     
     @IBAction func onAddToWishList(_ sender: Any) {
+        Database.database().reference().child("wishlists").child((Auth.auth().currentUser?.uid)!).updateChildValues([productID:"0"])
+        let alert = UIAlertController(title: "", message: "Добавлен в вишлист", preferredStyle: UIAlertControllerStyle.alert)
+        alert.addAction(UIAlertAction(title: "Click", style: UIAlertActionStyle.default, handler: nil))
+        self.present(alert, animated: true, completion: nil)
     }
     
     
     @IBAction func onAddToCollection(_ sender: Any) {
+        Database.database().reference().child("collections").child((Auth.auth().currentUser?.uid)!).updateChildValues([productID:"0"])
+        let alert = UIAlertController(title: "", message: "Добавлен в мою косметичку", preferredStyle: UIAlertControllerStyle.alert)
+        alert.addAction(UIAlertAction(title: "Click", style: UIAlertActionStyle.default, handler: nil))
+        self.present(alert, animated: true, completion: nil)
     }
     
     
