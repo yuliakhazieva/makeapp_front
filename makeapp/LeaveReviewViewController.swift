@@ -36,7 +36,7 @@ class LeaveReviewViewController: UIViewController, UIPickerViewDelegate, UIPicke
         ratingPicker.delegate = self
         ratingPicker.dataSource = self
         self.reviewText.layer.borderWidth = 5.0
-        self.reviewText.layer.borderColor = UIColor.purple as! CGColor;
+        self.reviewText.layer.borderColor = UIColor.purple.cgColor;
     }
 
     override func didReceiveMemoryWarning() {

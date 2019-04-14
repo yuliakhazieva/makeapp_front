@@ -10,10 +10,15 @@ import UIKit
 import FirebaseCore
 import FirebaseDatabase
 import Firebase
+import FirebaseAuth
 
 
 class ProductController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UITableViewDataSource, UITableViewDelegate {
 
+    @IBOutlet weak var rivgosh: UILabel!
+    @IBOutlet weak var ildebote: UILabel!
+    @IBOutlet weak var goldenApple: UILabel!
+    
     var productID: String = ""
     var imageList: [UIImage] = []
     var reviewList: [Review] = []
@@ -45,6 +50,7 @@ class ProductController: UIViewController, UICollectionViewDelegate, UICollectio
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
+    
         refProduct = Database.database().reference().child("products").child(productID);
         refProduct.observe(DataEventType.value, with: { (snapshot) in
             self.imageList.removeAll()
@@ -61,6 +67,11 @@ class ProductController: UIViewController, UICollectionViewDelegate, UICollectio
                     let data = try? Data(contentsOf: url!)
                     self.imageList.append(UIImage(data: data!)!)
                 }
+                
+                self.rivgosh.text = "Цена в РИВ ГОШ " + (snapshot.childSnapshot(forPath: "rivgosh").value as? String)!
+                self.goldenApple.text = "Цена в Золотое Яблоко " + (snapshot.childSnapshot(forPath: "goldenapple").value as? String)!
+                self.ildebote.text = "Цена в Иль Де Боте " + (snapshot.childSnapshot(forPath: "ildebote").value as? String)!
+                
                 self.pics.reloadData()
                 self.rating.text = snapshot.childSnapshot(forPath: "rating").value as? String
             }

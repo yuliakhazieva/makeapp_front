@@ -7,8 +7,20 @@
 //
 
 import UIKit
+import FlexColorPicker
 
-class SearchViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
+class SearchViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource, ColorPickerDelegate {
+    
+    var color:UIColor = UIColor.black
+    
+    func colorPicker(_ colorPicker: ColorPickerController, selectedColor: UIColor, usingControl: ColorControl) {
+        color = selectedColor
+    }
+    
+    func colorPicker(_ colorPicker: ColorPickerController, confirmedColor: UIColor, usingControl: ColorControl) {
+        color = confirmedColor
+    }
+    
     
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
@@ -22,6 +34,13 @@ class SearchViewController: UIViewController, UIPickerViewDelegate, UIPickerView
         return categories[row]
     }
 
+    
+    @IBAction func onPickColor(_ sender: Any) {
+        let colorPickerController = DefaultColorPickerViewController()
+        colorPickerController.delegate = self as ColorPickerDelegate
+        navigationController?.pushViewController(colorPickerController, animated: true)
+    }
+    
     @IBOutlet weak var categoryPicker: UIPickerView!
     @IBOutlet weak var productName: UITextField!
     @IBOutlet weak var producer: UITextField!
@@ -33,7 +52,7 @@ class SearchViewController: UIViewController, UIPickerViewDelegate, UIPickerView
     
     @IBAction func onSearchClick(_ sender: Any) {
         let vc = UIStoryboard(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "searchResult") as! SearchResultsViewController
-        vc.setup(company: producer.text!, product: productName.text!, category: categories[categoryPicker.selectedRow(inComponent: 0)])
+        vc.setup(company: producer.text!, product: productName.text!, category: categories[categoryPicker.selectedRow(inComponent: 0)], color: color)
         navigationController?.pushViewController(vc, animated: true)
     }
     

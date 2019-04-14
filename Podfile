@@ -9,10 +9,13 @@ target 'makeapp' do
   # Pods for makeapp
 pod 'Firebase/Core'
 pod 'Firebase/Auth'
+pod 'FlexColorPicker'
 pod 'FirebaseUI/Google'
 pod 'FirebaseUI/Facebook'
 pod 'FirebaseUI/Twitter'
+pod 'Kanna'
 pod 'FirebaseUI/Phone'
+pod 'Alamofire'
 pod 'Firebase/Database'
 pod 'SDWebImage', '~> 4.0'
 
