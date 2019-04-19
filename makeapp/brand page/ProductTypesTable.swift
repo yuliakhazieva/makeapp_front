@@ -51,11 +51,19 @@ class SuperMagicCollapse: UITableViewController {
                     product.observe(DataEventType.value, with: { (snapshot) in
                         for product in snapshot.children.allObjects as! [DataSnapshot] {
                         
-                            let picture = product.childSnapshot(forPath: "pics/0").value
+                            var picture = product.childSnapshot(forPath: "pics/0").value as! String
+                            while(picture.suffix(4) != "jpeg" && picture.suffix(3) != "jpg" && picture.suffix(3) != "png") {
+                                picture = String(picture.dropLast())
+                            }
                             let url = URL(string: picture as! String)
+                            if(url == nil) {
+                                print("avkepfve " + picture)
+                                continue
+                            }
+                            
                             let product: ProductModel = ProductModel(id: item, image: url!, name: product.childSnapshot(forPath: "name").value as! String)
                             self.productList[index].append(product)
-                        
+                            
                         }
                         self.tableView.reloadData()
                     })
@@ -110,12 +118,8 @@ extension SuperMagicCollapse: UICollectionViewDelegate, UICollectionViewDataSour
     func collectionView(_ collectionView: UICollectionView,cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as! ProductCollectionViewCell
-       
-        if(indexPath.row < productList.count){
-            if(indexPath.item < productList[indexPath.row].count){
-                cell.configure(with: productList[collectionView.tag][indexPath.item])
-            }
-        }
+        cell.configure(with: productList[collectionView.tag][indexPath.item])
+        
 
         return cell
     }

@@ -31,7 +31,7 @@ class SearchResultsViewController: UIViewController, UICollectionViewDelegate, U
         searchOutput.dataSource = self
         searchOutput.register(UINib.init(nibName: "collectionCell", bundle: nil), forCellWithReuseIdentifier: "Cell")
         
-        if(companyName != nil) {
+        if(companyName != "") {
             let ref = refCompsnies.queryOrderedByKey().queryEqual(toValue: companyName)
             ref.observe(.value, with:{ (snapshot: DataSnapshot) in
                 for companies in snapshot.children {
@@ -110,7 +110,7 @@ class SearchResultsViewController: UIViewController, UICollectionViewDelegate, U
 //            })
 //        }
         
-        if(productName != nil) {
+        if(productName != "") {
             var productIDsdouble: [String] = []
             refProducts.observe(DataEventType.value, with: { (snapshot) in
                 for product in snapshot.children.allObjects as! [DataSnapshot] {
@@ -200,6 +200,62 @@ class SearchResultsViewController: UIViewController, UICollectionViewDelegate, U
                                 } else {
                                     self.produtModels.append(product)
                                 }
+                                
+                            }
+                            self.searchOutput.reloadData()
+                        })
+                    }
+                }
+            })
+        }
+        
+        if(companyName == "" && productName == "") {
+            refProducts.observe(DataEventType.value, with: { (snapshot) in
+                for product in snapshot.children.allObjects as! [DataSnapshot] {
+                    if(product.childSnapshot(forPath:"name").value as! String == "velvet matte lipstick") {
+                        print ("a")
+                    }
+                    var cat = product.childSnapshot(forPath: "category").value as! String
+                    if(cat == "lipstick"){
+                    print(product.childSnapshot(forPath: "name").value as! String)
+                    let productR = (product.childSnapshot(forPath: "r").value as! CGFloat) / 225.0
+                    let productG = product.childSnapshot(forPath: "g").value as! CGFloat/225.0
+                    let productB = product.childSnapshot(forPath: "b").value as! CGFloat/225.0
+                    
+                        print(self.color)
+                        if(self.color != UIColor.black) {
+                            print(red)
+                            print(productR)
+//                            print (green - (productG as! CGFloat))
+//                            print (red - (productR as! CGFloat))
+//                            print (blue - (productB as! CGFloat))
+                            if(abs(green - (productG)) < 0.2
+                                && abs(red - (productR)) < 0.2
+                                && abs(blue - (productB)) < 0.2) {
+                                self.productIDs.append(product.key)
+                                print("tadaa")
+                            }
+                        } else {
+                            self.productIDs.append(product.key)
+                        }
+                    }
+                }
+                
+                self.produtModels = []
+                if (self.productIDs != []){
+                    for item in self.productIDs {
+                        let product = self.refProducts.queryOrderedByKey().queryEqual(toValue: item)
+                        product.observe(DataEventType.value, with: { (snapshot) in
+                            for product in snapshot.children.allObjects as! [DataSnapshot] {
+                                
+                                let productR = product.childSnapshot(forPath: "r").value
+                                let productG = product.childSnapshot(forPath: "g").value
+                                let productB = product.childSnapshot(forPath: "b").value
+                                let picture = product.childSnapshot(forPath: "pics/0").value
+                                let url = URL(string: picture as! String)
+                                let product: ProductModel = ProductModel(id: item, image: url!, name: product.childSnapshot(forPath: "name").value as! String)
+                                
+                                self.produtModels.append(product)
                                 
                             }
                             self.searchOutput.reloadData()

@@ -23,6 +23,7 @@ class ProductController: UIViewController, UICollectionViewDelegate, UICollectio
     var imageList: [UIImage] = []
     var reviewList: [Review] = []
     
+    @IBOutlet weak var category: UILabel!
     @IBOutlet var reviews: UITableView!
     @IBOutlet var pics: UICollectionView!
     @IBOutlet var addToCollection: UIButton!
@@ -72,6 +73,7 @@ class ProductController: UIViewController, UICollectionViewDelegate, UICollectio
                 self.goldenApple.text = "Цена в Золотое Яблоко " + (snapshot.childSnapshot(forPath: "goldenapple").value as? String)!
                 self.ildebote.text = "Цена в Иль Де Боте " + (snapshot.childSnapshot(forPath: "ildebote").value as? String)!
                 
+                //self.category.text = snapshot.childSnapshot(forPath: "category").value as? String
                 self.pics.reloadData()
                 self.rating.text = snapshot.childSnapshot(forPath: "rating").value as? String
             }
@@ -97,7 +99,11 @@ class ProductController: UIViewController, UICollectionViewDelegate, UICollectio
             }
         })
         
-        company.text = productID.split(separator: "Ф").map(String.init)[1].split(separator: " ").map(String.init)[0]
+        company.text = ""
+        var comp = productID.split(separator: "Ф").map(String.init)[1].split(separator: " ").map(String.init)
+        for index in 0..<comp.endIndex - 1 {
+            company.text = company.text! + comp[index] + " "
+        }
         
     }
     
