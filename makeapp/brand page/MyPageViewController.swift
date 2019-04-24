@@ -39,7 +39,7 @@ class MyPageViewController: UIViewController, UICollectionViewDelegate, UICollec
         myBag.register(UINib.init(nibName: "collectionCell", bundle: nil), forCellWithReuseIdentifier: "Cell")
         refProduct = Database.database().reference().child("products")
         refProduct.observe(DataEventType.value, with: { (productsnapshot) in
-            
+            if(((Auth.auth().currentUser!)) != nil){
             self.refWishlist = Database.database().reference().child("wishlists").child((Auth.auth().currentUser?.uid)!);
             self.refWishlist.observe(DataEventType.value, with: { (wishlistsnapshot) in
                 self.wishlistProductList.removeAll()
@@ -53,7 +53,9 @@ class MyPageViewController: UIViewController, UICollectionViewDelegate, UICollec
                 }
                 self.wishlist.reloadData()
                 self.myBag.reloadData()
+                
             })
+            }
             
             self.refMyBag = Database.database().reference().child("collections").child((Auth.auth().currentUser?.uid)!);
             self.refMyBag.observe(DataEventType.value, with: { (collectionsnapshot) in

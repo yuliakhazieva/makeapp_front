@@ -18,18 +18,36 @@ class LeaveReviewViewController: UIViewController, UIPickerViewDelegate, UIPicke
     var refReviews: DatabaseReference?
     var refProducts: DatabaseReference?
     var productId: String = ""
-    var currentRating: Int = 0;
+    var currentRating: String = "";
     var numOfReviews: Int = 0;
+    var fin = false
     
     @IBAction func onSave(_ sender: Any) {
-        refReviews = Database.database().reference().child("reviews")
-        let selecedRating = ratingPicker.selectedRow(inComponent: 0) + 1
-        let data = ["text": reviewText.text, "author": Auth.auth().currentUser?.uid, "rating": String(selecedRating)] as [String : Any]
-        refReviews?.child(productId).childByAutoId().setValue(data)
-        var newRating = (currentRating * numOfReviews + selecedRating) / (numOfReviews + 1)
-        refProducts?.child(productId).updateChildValues(["rating": newRating, "numReviews": numOfReviews + 1])
+        refProducts = Database.database().reference().child("products")
+        refProducts?.child(productId).observe(DataEventType.value, with: { (snapshot) in
+            self.currentRating = String(describing:snapshot.childSnapshot(forPath: "rating").value)
+            if(self.currentRating.contains("?")) {
+                self.currentRating = "0"
+            } else {
+                self.currentRating = String(snapshot.childSnapshot(forPath: "rating").value as! Double)
+            }
+            self.numOfReviews = Int((snapshot.childSnapshot(forPath:"numReviews").value as! NSString).intValue)
+            if(!self.fin) {
+                let selecedRating = self.ratingPicker.selectedRow(inComponent: 0) + 1
+                var newRating = (Double(self.currentRating)! * Double(self.numOfReviews) + Double(selecedRating)) / Double(self.numOfReviews + 1)
+                self.refProducts?.child(self.productId).updateChildValues(["rating": newRating, "numReviews": String(self.numOfReviews + 1)])
+                self.refReviews = Database.database().reference().child("reviews")
+                let data = ["text": self.reviewText.text, "author": Auth.auth().currentUser?.uid, "rating": String(selecedRating)] as [String : Any]
+                self.refReviews?.child(self.productId).childByAutoId().setValue(data)
+                
+                self.fin = true
+            }
+        })
+        
         navigationController?.popViewController(animated: true)
     }
+    
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -57,10 +75,7 @@ class LeaveReviewViewController: UIViewController, UIPickerViewDelegate, UIPicke
     
     func setUp(productId: String) {
         self.productId = productId
-        refProducts?.child(productId).observe(DataEventType.value, with: { (snapshot) in
-            self.currentRating = snapshot.childSnapshot(forPath: "rating").value as! Int
-            self.numOfReviews = snapshot.childSnapshot(forPath: "numReviews").value as! Int
-        })
+        
     }
     
 }

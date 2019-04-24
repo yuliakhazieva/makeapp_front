@@ -77,7 +77,10 @@ extension UIColor {
         let (r1, g1, b1) = rgb
         let (r2, g2, b2) = color.rgb
 
-        return (abs(r1 - r2) + abs(g1 - g2) + abs(b1 - b2)) / 3
+        let r = abs(r1 - r2)
+        let b = abs(b1 - b2)
+        let g = abs(g1 - g2)
+        return (r + g + b)/3
     }
 }
 

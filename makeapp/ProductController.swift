@@ -58,7 +58,14 @@ class ProductController: UIViewController, UICollectionViewDelegate, UICollectio
             if snapshot.childrenCount > 0 {
                 
                 self.name.text = snapshot.childSnapshot(forPath: "name").value as? String
-                self.price.text = snapshot.childSnapshot(forPath: "price").value as? String
+                var currency: String ;
+                if((snapshot.childSnapshot(forPath: "price").value as! NSString).floatValue < 200.0) {
+                    currency = "$"
+                } else {
+                    currency = "₽"
+                }
+                self.price.text = (snapshot.childSnapshot(forPath: "price").value as? String)! + currency
+                
                 
                 let pictures = snapshot.childSnapshot(forPath: "pics").children.allObjects as! [DataSnapshot]
                 
@@ -69,20 +76,31 @@ class ProductController: UIViewController, UICollectionViewDelegate, UICollectio
                     self.imageList.append(UIImage(data: data!)!)
                 }
                 
-                self.rivgosh.text = "Цена в РИВ ГОШ " + (snapshot.childSnapshot(forPath: "rivgosh").value as? String)!
+                if(type(of: snapshot.childSnapshot(forPath: "elize").value!) != NSNull.self) {
+                    self.rivgosh.text = "Цена в ЭЛИЗЕ " + (snapshot.childSnapshot(forPath: "elize").value as? String)!
+                } else {
+                    self.rivgosh.text = "Цена в ЭЛИЗЕ N/A"
+                }
                 self.goldenApple.text = "Цена в Золотое Яблоко " + (snapshot.childSnapshot(forPath: "goldenapple").value as? String)!
                 self.ildebote.text = "Цена в Иль Де Боте " + (snapshot.childSnapshot(forPath: "ildebote").value as? String)!
                 
-                //self.category.text = snapshot.childSnapshot(forPath: "category").value as? String
+               // self.category.text = snapshot.childSnapshot(forPath: "category").value as? String
                 self.pics.reloadData()
-                self.rating.text = snapshot.childSnapshot(forPath: "rating").value as? String
+                if(String(describing:snapshot.childSnapshot(forPath: "rating").value) == "Optional(?)"){
+                    self.rating.text = "0" + "/10"
+                } else {
+                    self.rating.text = String(snapshot.childSnapshot(forPath: "rating").value as! Double) + "/10"
+                }
             }
         })
         
         refReviews = Database.database().reference().child("reviews").child(productID);
+        var flag: Bool = false;
         refReviews.observe(DataEventType.value, with: { (snapshot) in
             self.reviewList.removeAll()
             if snapshot.childrenCount > 0 {
+                if(!flag){
+                    flag = true;
                 for review in snapshot.children.allObjects as! [DataSnapshot] {
                 
                     let authorID = review.childSnapshot(forPath: "author").value as? String
@@ -95,6 +113,7 @@ class ProductController: UIViewController, UICollectionViewDelegate, UICollectio
                         self.reviewList.append(Review(author: authorName as! String, rating: rating!, reviewText: reviewText!))
                     self.reviews.reloadData()
                     })
+                }
                 }
             }
         })
@@ -118,7 +137,7 @@ class ProductController: UIViewController, UICollectionViewDelegate, UICollectio
     @IBAction func onAddToCollection(_ sender: Any) {
         Database.database().reference().child("collections").child((Auth.auth().currentUser?.uid)!).updateChildValues([productID:"0"])
         let alert = UIAlertController(title: "", message: "Добавлен в мою косметичку", preferredStyle: UIAlertControllerStyle.alert)
-        alert.addAction(UIAlertAction(title: "Click", style: UIAlertActionStyle.default, handler: nil))
+        alert.addAction(UIAlertAction(title: "Ок", style: UIAlertActionStyle.default, handler: nil))
         self.present(alert, animated: true, completion: nil)
     }
     
